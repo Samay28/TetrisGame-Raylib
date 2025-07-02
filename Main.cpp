@@ -1,33 +1,29 @@
 #include <iostream>  
 #include "raylib.h" 
+#include "Grid.h"
+
 using namespace std;
 int main(void)
 {
-    // Initialization
-    //--------------------------------------------------------------------------------------
-    const int screenWidth = 800;
-    const int screenHeight = 450;
+    const int screenWidth = 300;
+    const int screenHeight = 600;
 
     InitWindow(screenWidth, screenHeight, "bomsdika");
 
     SetTargetFPS(60);               
+    Grid grid = Grid();
+   
  
 
     // Main game loop
     while (!WindowShouldClose())    
     {
-        // Update
-        //----------------------------------------------------------------------------------
-        // TODO: Update your variables here
-        //----------------------------------------------------------------------------------
 
-        // Draw
-        //----------------------------------------------------------------------------------
         BeginDrawing();
 
-        ClearBackground(RAYWHITE);
+        ClearBackground(BLACK);
 
-        DrawText("This is Bomsdika Window!!!", 200, 200, 20, LIGHTGRAY);
+        grid.Draw();
 
         EndDrawing();
       
