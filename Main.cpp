@@ -1,6 +1,7 @@
 #include <iostream>  
 #include "raylib.h" 
 #include "Grid.h"
+#include "Blocks.cpp"
 
 using namespace std;
 int main(void)
@@ -12,7 +13,7 @@ int main(void)
 
     SetTargetFPS(60);               
     Grid grid = Grid();
-   
+    LBlock lb = LBlock();
  
 
     // Main game loop
@@ -24,6 +25,7 @@ int main(void)
         ClearBackground(BLACK);
 
         grid.Draw();
+        lb.Draw();
 
         EndDrawing();
       

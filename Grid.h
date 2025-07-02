@@ -2,6 +2,7 @@
 #include <iostream>
 #include <raylib.h>
 #include <vector>
+
 using namespace std;
 class Grid
 {
@@ -14,7 +15,7 @@ public:
 	void Draw();
 
 private:
-	vector<Color>InitializeColors();
+	/*vector<Color>InitializeColors();*/
 	int Row;
 	int Col;
 	int cellSize;
