@@ -13,7 +13,7 @@ int main(void)
 
     SetTargetFPS(60);               
     Grid grid = Grid();
-    LBlock lb = LBlock();
+    SBlock sb = SBlock();
  
 
     // Main game loop
@@ -25,7 +25,7 @@ int main(void)
         ClearBackground(BLACK);
 
         grid.Draw();
-        lb.Draw();
+        sb.Draw();
 
         EndDrawing();
       
