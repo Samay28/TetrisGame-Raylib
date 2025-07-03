@@ -18,7 +18,7 @@ public:
 	vector<Color>colors;
 
 
-	void Draw();
+	void Draw(int offsetX, int offsetY);
 
 
 	//movement

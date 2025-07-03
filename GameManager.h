@@ -9,6 +9,7 @@ class GameManager
 {
 public:
 	GameManager();
+	~GameManager();
 	Grid grid;
 
 	Block GetRandomBlock();
@@ -16,20 +17,30 @@ public:
 	void Draw();
 
 	void HandleInput();
-	void MoveBlockLeft();
-	void MoveBlockRight();
 	void MoveBlockDown();
 
+	void setScore(int s) { score = s; }
+	int getScore() { return score; }
+	void updateScore(int linesCleared, int moveDownPoints);
+
 	bool GameOver;
+	Music music;
 private:
 
+	int score;
 	void ResetGame();
 	bool blockFits();
 	bool isBlockOutside();	
 	void LockBlock(); //after it touches the grnd
 	void RotateBlock();
+	void MoveBlockLeft();
+	void MoveBlockRight();
+
 	vector<Block> blocks;
 	Block currentBlock;
 	Block nextBlock;
+
+	Sound soundRotate;
+	Sound soundClear;
 };
 

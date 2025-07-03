@@ -8,6 +8,21 @@ GameManager::GameManager()
 	currentBlock = GetRandomBlock();
 	nextBlock = GetRandomBlock();
 	GameOver = false;	
+
+	InitAudioDevice(); // for sound initialization
+	music = LoadMusicStream("Sounds/music.mp3");
+	PlayMusicStream(music);
+
+	soundRotate = LoadSound("Sounds/rotate.mp3");
+	soundClear = LoadSound("Sounds/clear.mp3");
+}
+
+GameManager::~GameManager()
+{
+	UnloadMusicStream(music);
+	UnloadSound(soundRotate);
+	UnloadSound(soundClear);
+	CloseAudioDevice();
 }
 
 Block GameManager::GetRandomBlock()
@@ -29,7 +44,19 @@ vector<Block> GameManager::GetAllBlocks()
 void GameManager::Draw()
 {
 	grid.Draw();
-	currentBlock.Draw();
+	currentBlock.Draw(11,11);
+	switch (nextBlock.getId()) //for UI
+	{
+	case 3 :
+		nextBlock.Draw(255, 290);
+		break;
+	case 4:
+		nextBlock.Draw(255, 280);
+		break;
+	default:
+		nextBlock.Draw(270, 270);
+		break;
+	}
 }
 
 void GameManager::HandleInput()
@@ -50,6 +77,7 @@ void GameManager::HandleInput()
 		break;
 	case KEY_DOWN:
 		MoveBlockDown();
+		updateScore(0, 1);
 		break;
 	case KEY_UP:
 			RotateBlock();
@@ -88,12 +116,32 @@ void GameManager::MoveBlockDown()
 	}
 }
 
+void GameManager::updateScore(int linesCleared, int moveDownPoints)
+{
+	switch (linesCleared)
+	{
+	case 1:
+		score += 100;
+		break;
+	case 2 :
+		score += 200;
+		break;
+	case 3:
+		score += 300;
+		break;
+	default:
+		break;
+	}
+	score += moveDownPoints;
+}
+
 void GameManager::ResetGame()
 {
 	grid.InitializeGrid();
 	blocks = GetAllBlocks();
 	currentBlock = GetRandomBlock();
 	nextBlock = GetRandomBlock();
+	setScore(0);
 }
 
 bool GameManager::blockFits()
@@ -136,7 +184,12 @@ void GameManager::LockBlock()
 		GameOver = true;
 	}
 	nextBlock = GetRandomBlock();
-	grid.ClearFullRows();
+	int rowsCleared =  grid.ClearFullRows();
+	if (rowsCleared > 0)
+	{
+		PlaySound(soundClear);
+	}
+	updateScore(rowsCleared, 0);
 }
 
 void GameManager::RotateBlock()
@@ -146,5 +199,9 @@ void GameManager::RotateBlock()
 	if (isBlockOutside() || !blockFits())
 	{
 		currentBlock.undoRot();
+	}
+	else
+	{
+		PlaySound(soundRotate);
 	}
 }

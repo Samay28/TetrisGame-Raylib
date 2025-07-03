@@ -77,7 +77,7 @@ void Grid::Draw()
 		for (int j = 0; j < Col; j++)
 		{
 			int cellValue = GridMap[i][j];	
-			DrawRectangle(j * cellSize +1, i * cellSize+1, cellSize-1,cellSize-1, colors[cellValue]);
+			DrawRectangle(j * cellSize +11, i * cellSize+11, cellSize-1,cellSize-1, colors[cellValue]);
 		}
 	}
 }
