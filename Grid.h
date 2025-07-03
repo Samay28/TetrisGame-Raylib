@@ -13,10 +13,11 @@ public:
 	bool isCellOutside(int row, int col);
 	void InitializeGrid();
 	void PrintGridValues();
+	bool isCellEmpty(int r, int c);
 	void Draw();
 
 private:
-	
+		
 	int Row;
 	int Col;
 	int cellSize;

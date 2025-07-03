@@ -41,6 +41,15 @@ void Grid::PrintGridValues()
 	}
 }
 
+bool Grid::isCellEmpty(int r, int c)
+{
+	if (GridMap[r][c] == 0)
+	{
+		return true;
+	}
+	return false;
+}
+
 void Grid::Draw()
 {
 	for (int i = 0; i < Row; i++)

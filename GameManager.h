@@ -21,6 +21,7 @@ public:
 	void MoveBlockDown();
 private:
 
+	bool blockFits();
 	bool isBlockOutside();	
 	void LockBlock(); //after it touches the grnd
 	void RotateBlock();
