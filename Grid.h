@@ -14,10 +14,14 @@ public:
 	void InitializeGrid();
 	void PrintGridValues();
 	bool isCellEmpty(int r, int c);
+	int ClearFullRows();
 	void Draw();
 
 private:
 		
+	bool isRowFull(int row);
+	void ClearRow(int r);
+	void MoveRowDown(int r, int rownum);
 	int Row;
 	int Col;
 	int cellSize;

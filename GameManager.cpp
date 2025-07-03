@@ -54,7 +54,7 @@ void GameManager::HandleInput()
 void GameManager::MoveBlockLeft()
 {	
 	currentBlock.Move(0, -1);
-	if (isBlockOutside() || blockFits())
+	if (isBlockOutside() || !blockFits())
 	{
 		currentBlock.Move(0, 1);
 	}
@@ -63,7 +63,7 @@ void GameManager::MoveBlockLeft()
 void GameManager::MoveBlockRight()
 {
 	currentBlock.Move(0, 1);
-	if (isBlockOutside() || blockFits())
+	if (isBlockOutside() || !blockFits())
 	{
 		currentBlock.Move(0, -1);
 	}
@@ -73,7 +73,7 @@ void GameManager::MoveBlockDown()
 {	
 
 	currentBlock.Move(1, 0);
-	if (isBlockOutside() || blockFits())
+	if (isBlockOutside() || !blockFits())
 	{
 		currentBlock.Move(-1, 0);
 		LockBlock();
@@ -87,10 +87,10 @@ bool GameManager::blockFits()
 	{
 		if (grid.isCellEmpty(item.row, item.column) == false)
 		{
-			return true;
+			return false;
 		}
 	}
-		return false;
+		return true;
 }
 
 bool GameManager::isBlockOutside()
@@ -116,12 +116,13 @@ void GameManager::LockBlock()
 	}
 	currentBlock = nextBlock;
 	nextBlock = GetRandomBlock();
+	grid.ClearFullRows();
 }
 
 void GameManager::RotateBlock()
 {
 	currentBlock.Rotate();
-	if (isBlockOutside())
+	if (isBlockOutside() || !blockFits())
 	{
 		currentBlock.undoRot();
 	}
