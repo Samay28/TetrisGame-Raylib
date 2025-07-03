@@ -1,7 +1,7 @@
 #include <iostream>  
 #include "raylib.h" 
-#include "Grid.h"
-#include "Blocks.cpp"
+#include "GameManager.h"
+
 
 using namespace std;
 int main(void)
@@ -12,9 +12,9 @@ int main(void)
     InitWindow(screenWidth, screenHeight, "bomsdika");
 
     SetTargetFPS(60);               
-    Grid grid = Grid();
-    SBlock sb = SBlock();
- 
+    
+    
+    GameManager gm = GameManager();
 
     // Main game loop
     while (!WindowShouldClose())    
@@ -24,8 +24,7 @@ int main(void)
 
         ClearBackground(BLACK);
 
-        grid.Draw();
-        sb.Draw();
+        gm.Draw();
 
         EndDrawing();
       

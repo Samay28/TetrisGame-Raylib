@@ -20,9 +20,17 @@ public:
 
 	void Draw();
 
+
+	//movement
+	void Move(int r, int c);
+	vector<Position> GetCellPosition();
+
 private:
 	int id;
 	int cellSize;
 	int RotationState;
+
+	int rowOffset; //movement
+	int columnOffset;
 };
 
