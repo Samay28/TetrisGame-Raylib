@@ -14,7 +14,16 @@ public:
 	Block GetRandomBlock();
 	vector<Block> GetAllBlocks();
 	void Draw();
+
+	void HandleInput();
+	void MoveBlockLeft();
+	void MoveBlockRight();
+	void MoveBlockDown();
 private:
+
+	bool isBlockOutside();	
+	void LockBlock(); //after it touches the grnd
+	void RotateBlock();
 	vector<Block> blocks;
 	Block currentBlock;
 	Block nextBlock;

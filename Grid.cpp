@@ -10,6 +10,15 @@ Grid::Grid()
 	colors = GetAllColors();
 }
 
+bool Grid::isCellOutside(int row, int col)
+{
+	if (row >= 0 && row <Row && col >= 0 && col< Col)
+	{
+		return false;
+	}
+	return true;
+}
+
 void Grid::InitializeGrid()
 {
 	for (int i = 0; i < Row; i++)

@@ -10,12 +10,13 @@ public:
 	Grid();
 	int GridMap[20][10];
 
+	bool isCellOutside(int row, int col);
 	void InitializeGrid();
 	void PrintGridValues();
 	void Draw();
 
 private:
-	/*vector<Color>InitializeColors();*/
+	
 	int Row;
 	int Col;
 	int cellSize;

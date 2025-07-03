@@ -23,6 +23,8 @@ public:
 
 	//movement
 	void Move(int r, int c);
+	void Rotate();
+	void undoRot();
 	vector<Position> GetCellPosition();
 
 private:

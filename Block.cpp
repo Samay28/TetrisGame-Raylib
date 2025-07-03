@@ -24,6 +24,20 @@ void Block::Move(int r, int c)
 	columnOffset += c;
 }
 
+void Block::Rotate()
+{
+	RotationState++;
+	if (RotationState == (int)cells.size())
+	{
+		RotationState = 0;
+	}
+}
+
+void Block::undoRot()
+{
+	RotationState--;
+}
+
 vector<Position> Block::GetCellPosition() //modifying occupied cells
 {
 	vector<Position>tiles = cells[RotationState]; //current
