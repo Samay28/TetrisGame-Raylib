@@ -7,6 +7,7 @@ GameManager::GameManager()
 	blocks = GetAllBlocks();
 	currentBlock = GetRandomBlock();
 	nextBlock = GetRandomBlock();
+	GameOver = false;	
 }
 
 Block GameManager::GetRandomBlock()
@@ -34,6 +35,11 @@ void GameManager::Draw()
 void GameManager::HandleInput()
 {
 	int keyPressed = GetKeyPressed();
+	if (GameOver && keyPressed != 0)
+	{
+		GameOver = false;
+		ResetGame();
+	}
 	switch (keyPressed)
 	{
 	case KEY_LEFT:
@@ -53,6 +59,7 @@ void GameManager::HandleInput()
 
 void GameManager::MoveBlockLeft()
 {	
+	if (GameOver) return;
 	currentBlock.Move(0, -1);
 	if (isBlockOutside() || !blockFits())
 	{
@@ -61,7 +68,8 @@ void GameManager::MoveBlockLeft()
 }
 
 void GameManager::MoveBlockRight()
-{
+{	
+	if (GameOver) return;
 	currentBlock.Move(0, 1);
 	if (isBlockOutside() || !blockFits())
 	{
@@ -71,13 +79,21 @@ void GameManager::MoveBlockRight()
 
 void GameManager::MoveBlockDown()
 {	
-
+	if (GameOver) return;
 	currentBlock.Move(1, 0);
 	if (isBlockOutside() || !blockFits())
 	{
 		currentBlock.Move(-1, 0);
 		LockBlock();
 	}
+}
+
+void GameManager::ResetGame()
+{
+	grid.InitializeGrid();
+	blocks = GetAllBlocks();
+	currentBlock = GetRandomBlock();
+	nextBlock = GetRandomBlock();
 }
 
 bool GameManager::blockFits()
@@ -115,12 +131,17 @@ void GameManager::LockBlock()
 		grid.GridMap[i.row][i.column] = currentBlock.getId();
 	}
 	currentBlock = nextBlock;
+	if (!blockFits())
+	{
+		GameOver = true;
+	}
 	nextBlock = GetRandomBlock();
 	grid.ClearFullRows();
 }
 
 void GameManager::RotateBlock()
-{
+{	
+	if (GameOver) return;	
 	currentBlock.Rotate();
 	if (isBlockOutside() || !blockFits())
 	{

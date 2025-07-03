@@ -19,9 +19,11 @@ public:
 	void MoveBlockLeft();
 	void MoveBlockRight();
 	void MoveBlockDown();
+
+	bool GameOver;
 private:
 
-	
+	void ResetGame();
 	bool blockFits();
 	bool isBlockOutside();	
 	void LockBlock(); //after it touches the grnd

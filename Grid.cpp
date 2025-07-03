@@ -69,6 +69,7 @@ int Grid::ClearFullRows()
 	return completed;
 }
 
+
 void Grid::Draw()
 {
 	for (int i = 0; i < Row; i++)
