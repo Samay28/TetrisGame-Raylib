@@ -57,7 +57,8 @@ int main(void)
 
         DrawRectangleRounded({ 320,55,170,60 }, 0.3, 6, lightBlue);
         char scoreTxt[10]; //draw score text implmenetation 
-        sprintf_s(scoreTxt, sizeof(scoreTxt), "%d", gm.getScore()); //converted to int
+        snprintf(scoreTxt, sizeof(scoreTxt), "%d", gm.getScore());
+        //converted to int
         Vector2 textSize = MeasureTextEx(font,scoreTxt,38,2);
         DrawTextEx(font, scoreTxt, { 320 + (170 - textSize.x)/2,65 }, 38, 2, WHITE); //170 is width of rect, doing this to anchor it at centre always
        
